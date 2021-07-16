@@ -1,24 +1,39 @@
-<div>
-    <table>
-    {% for i in range(board.board_size) %}
-        <tr>
-            {% for j in range(board.board_size) %}
-                <td>{{ board.board[i][j] }}</td>
-            {% endfor %}
-        </tr>
-    {% endfor %}
-    </table>
-</div>
+{% extends 'base.html' %}
 
-<div>
-    {% for word in board.solution %}
-    <p>{{ word }}</p>
-    {% endfor %}
-</div>
+{% block content %}
+<div class="container-fluid">
+    <div class="mt-5">
+        <table class="table table-dark table-bordered">
+        {% for i in range(board.board_size) %}
+            <tr>
+                {% for j in range(board.board_size) %}
+                    <td>{{ board.board[i][j] }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
 
-<div>
-    <pre>Num words in solution: {{ board.solver_stats["total_words_found"] }}</pre>
-    <pre>Total time elapsed: {{ board.solver_stats["solving_time"] }}</pre>
-</div>
+    <div class="mt-5 text-center">
+        <p>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#solution" aria-expanded="false" aria-controls="solution">
+            Show Solution
+          </button>
+        </p>
+        <div class="collapse" id="solution">
+            <div class="card card-body">
+                {% for word in board.solution %}
+                {{ word }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
+    <div>
+        <pre>Num words in solution: {{ board.solver_stats["total_words_found"] }}</pre>
+        <pre>Total time elapsed: {{ board.solver_stats["solving_time"] }}</pre>
+    </div>
+</div>
 {% include 'index.html' %}
+
+{% endblock content %}

@@ -69,3 +69,4 @@ A	J	T	U
 
 ## Programming notes
 - Interestingly, `get_prefixes` takes longer if the twl06-prefixes.json already exists than when it gets created!
+- On the `board.html` template, the `Show Solution` button is meant to toggle, but only un-collapses, and doesn't collapse

@@ -1,7 +1,14 @@
-<p>Enter your board</p>
-<p>e.g. gtna wexv dnsh ajtu</p>
-<form action="/solve">
-    <input type="text" name="board">
-    <input type="submit" value="Submit">
-</form>
-<p>Note: Enter qu as q (e.g. aqyw ooez vois rags)</p>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <form action="/solve">
+      <div class="form-group mt-5">
+          <label for="board">Enter your board</label>
+          <input type="text" class="form-control form-control-lg" name="board" id="board" placeholder="e.g. gtna wexv dnsh ajtu" aria-describedby="boardInputHelp">
+          <small id="boardInputHelp" class="form-text text-muted">Note: Enter qu as q (e.g. aqyw ooez vois rags)</small>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </form>
+</div>
+{% endblock content %}
