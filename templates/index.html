@@ -1,0 +1,22 @@
+<div>
+    <table>
+    {% for i in range(board.board_size) %}
+        <tr>
+            {% for j in range(board.board_size) %}
+                <td>{{ board.board[i][j] }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+
+<div>
+    {% for word in board.solution %}
+    <p>{{ word }}</p>
+    {% endfor %}
+</div>
+
+<div>
+    <pre>Num words in solution: {{ board.solver_stats["total_words_found"] }}</pre>
+    <pre>Total time elapsed: {{ board.solver_stats["solving_time"] }}</pre>
+</div>

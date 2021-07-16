@@ -31,11 +31,19 @@ class Board:
         N = self.board_size
         self.board = [[shuffled_dice[i + j * N] for i in range(N)] for j in range(N)]
 
-    def print_possible_words(self, listname):
+    def solve(self, listname):
         solver = Solver(self.board, listname)
-        solution = solver.solve()
+        self.solution = sorted(solver.solve())
+        self.solver_stats = {
+            "total_words_checked": solver.total_words_checked,
+            "total_words_found": len(self.solution),
+            "solving_time": solver.solving_time,
+        }
+
+    def print_possible_words(self, listname):
+        self.solve(listname)
         print("Possible words:")
-        pprint(solution)
-        print("Num words in solution:", len(solution))
-        print("Num words checked:", solver.total_words_checked)
-        print("Total time elapsed:", solver.solving_time)
+        pprint(self.solution)
+        print("Num words in solution:", self.solver_stats["total_words_found"])
+        print("Num words checked:", self.solver_stats["total_words_checked"])
+        print("Total time elapsed:", self.solver_stats["solving_time"])

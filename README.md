@@ -64,5 +64,8 @@ D	N	S	H
 A	J	T	U
 ```
 
+## Run locally with Flask
+```$ FLASK_ENV=development flask run```
+
 ## Programming notes
 - Interestingly, `get_prefixes` takes longer if the twl06-prefixes.json already exists than when it gets created!
