@@ -14,6 +14,10 @@
         </table>
     </div>
 
+    <div id="timer-div" class="text-center mt-5">
+        <h1 id="timer" class="display-1"></h1>
+    </div>
+
     <div class="mt-5 text-center">
         <p>
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#solution" aria-expanded="false" aria-controls="solution">
@@ -36,4 +40,9 @@
 </div>
 {% include 'index.html' %}
 
+{% block javascript %}
+  <script type="text/javascript" src="{{ url_for('static', filename='js/timer.js') }}"></script>
+{% endblock javascript %}
+
 {% endblock content %}
+
