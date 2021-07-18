@@ -1,15 +1,38 @@
-var timer2 = "3:01";
-var interval = setInterval(function() {
-  var timer = timer2.split(':');
-  //by parsing integer, I avoid all extra string processing
-  var minutes = parseInt(timer[0], 10);
-  var seconds = parseInt(timer[1], 10);
-  --seconds;
-  minutes = (seconds < 0) ? --minutes : minutes;
-  if (minutes < 0) clearInterval(interval);
-  seconds = (seconds < 0) ? 59 : seconds;
-  seconds = (seconds < 10) ? '0' + seconds : seconds;
-  //minutes = (minutes < 10) ?  minutes : minutes;
-  $('#timer').html(minutes + ':' + seconds);
-  timer2 = minutes + ':' + seconds;
-}, 1000);
+$('#timer-display').html('3:00');
+var timer = null;
+
+function setTime() {
+    var displayedTime = $('#timer-display').html().split(':');
+    if (displayedTime[0] == '0' && displayedTime[1] == '00') {
+        clearInterval(timer);
+        return;
+    }
+    var minutes = parseInt(displayedTime[0], 10);
+    var seconds = parseInt(displayedTime[1], 10);
+    if (--seconds < 0) {
+        minutes--;
+        seconds = 59;
+    }
+    seconds = (seconds < 10) ? '0' + seconds : seconds;
+    $('#timer-display').html(minutes + ':' + seconds);
+}
+
+$('#timer-starter').click(function() {
+    if (!timer) {
+        timer = setInterval(setTime, 1000);
+    }
+});
+
+function stopTimer() {
+    if (timer) {
+        clearInterval(timer);
+        timer = null;
+    }
+}
+
+$('#timer-stopper').click(stopTimer);
+
+$('#timer-resetter').click(function() {
+    stopTimer();
+    $('#timer-display').html('3:00');
+});
