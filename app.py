@@ -1,9 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 from board import Board
 from util import get_board_input
 
+import os
+
 app = Flask(__name__)
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico')
 
 @app.route("/")
 def index():
