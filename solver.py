@@ -1,18 +1,17 @@
-import json
 import time
 
 from util import get_words_and_prefixes
 
 
 def convert_human_input_to_solver_input(human_input):
-    '''
+    """
     :param str human_input: e.g. 'aqyw ooez vois rags'
     :rtype: list
     :returns: [['a','qu','y','w'],
                ['o','o','e','z'],
                ['v','o','i','s'],
                ['r','a','g','s']]
-    '''
+    """
     human_input = human_input.lower()
     has_q = "q" in human_input
     rows = human_input.split()

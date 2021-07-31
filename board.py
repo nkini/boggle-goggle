@@ -2,19 +2,18 @@ import random
 from pprint import pprint
 
 import dice
-from util import get_words
 from solver import Solver
 
 
 def convert_human_input_to_board(human_input):
-    '''
+    """
     :param str human_input: e.g. 'aqyw ooez vois rags'
     :rtype: list
     :returns: [['A','Qu','Y','W'],
                ['O','O','E','Z'],
                ['V','O','I','S'],
                ['R','A','G','S']]
-    '''
+    """
     human_input = human_input.upper()
     has_q = "Q" in human_input
     rows = human_input.split()
@@ -53,14 +52,14 @@ class Board:
         return self.get_human_input()
 
     def get_human_input(self):
-        human_input = ''
+        human_input = ""
         for row in self.board:
             for char in row:
-                if char.lower() == 'qu':
-                    human_input += 'q'
+                if char.lower() == "qu":
+                    human_input += "q"
                 else:
                     human_input += char.lower()
-            human_input += ' '
+            human_input += " "
         return human_input[:-1]
 
     def solve(self, listname):

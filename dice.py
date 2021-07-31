@@ -1,4 +1,5 @@
 import random
+import sys
 
 # Test Dice 2x2
 DICE2x2 = [
