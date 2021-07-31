@@ -1,7 +1,7 @@
-$( document ).ready(function() {
+function get_and_populate_solution(board_input) {
     $.ajax({
         url: '/solve_get_json',
-        data: 'board='+$('#boardInput').val(),
+        data: 'board='+board_input,
         type: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -15,14 +15,12 @@ $( document ).ready(function() {
             console.log(error)
         }
     });
+}
 
-
-    $('[data-toggle="collapse"]').click(function() {
-        if ($(this).attr('aria-expanded')) {
-            $(this).text("Hide Solution");
-        } else {
-            $(this).text("Show Solution");
-        }
-    });
-
+$('[data-toggle="collapse"]').click(function() {
+    if ($(this).attr('aria-expanded') == "false") {
+        $(this).text("Hide Solution");
+    } else {
+        $(this).text("Show Solution");
+    }
 });
