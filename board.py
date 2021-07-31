@@ -3,7 +3,7 @@ from pprint import pprint
 
 import dice
 from util import get_words
-from solver import Solver
+from solver import Solver, get_solver_input
 
 
 class Board:
@@ -31,19 +31,30 @@ class Board:
         N = self.board_size
         self.board = [[shuffled_dice[i + j * N] for i in range(N)] for j in range(N)]
 
+    def get_solver_input(self):
+        return get_solver_input(self.board)
+
+    def get_human_input(self):
+        human_input = ''
+        for row in self.board:
+            for char in row:
+                if char.lower() == 'qu':
+                    human_input += 'q'
+                else:
+                    human_input += char.lower()
+            human_input += ' '
+        return human_input[:-1]
+
     def solve(self, listname):
-        solver = Solver(self.board, listname)
-        self.solution = sorted(solver.solve())
-        self.solver_stats = {
-            "total_words_checked": solver.total_words_checked,
-            "total_words_found": len(self.solution),
-            "solving_time": solver.solving_time,
-        }
+        solver_input = self.get_solver_input()
+        self.solver = Solver(solver_input, listname)
+        self.solver.solve()
+        return self.solver
 
     def print_possible_words(self, listname):
         self.solve(listname)
         print("Possible words:")
-        pprint(self.solution)
-        print("Num words in solution:", self.solver_stats["total_words_found"])
-        print("Num words checked:", self.solver_stats["total_words_checked"])
-        print("Total time elapsed:", self.solver_stats["solving_time"])
+        pprint(self.solver.solution)
+        print("Num words in solution:", self.solver.stats["total_words_found"])
+        print("Num words checked:", self.solver.stats["total_words_checked"])
+        print("Total time elapsed:", self.solver.stats["solving_time"])

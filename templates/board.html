@@ -17,17 +17,16 @@
     </div>
 
     <div class="mt-2 text-center">
-        <pre>Num words in solution: {{ board.solver_stats["total_words_found"] }}</pre>
+        <input type="hidden" id="boardInput" name="boardInput" value="{{ board.get_human_input()  }}" />
         <p>
-          <button class="btn btn-primary btn-lg" type="button" data-toggle="collapse" data-target="#solution" aria-expanded="false" aria-controls="solution">
-            Show Solution
+          <button class="btn btn-primary btn-lg" type="button" data-toggle="collapse" data-target="#solution" aria-expanded="false" aria-controls="solution" id="solutionToggleButton" disabled>
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+  Computing solution
           </button>
         </p>
+        <pre id="numWordsInSolution"></pre>
         <div class="collapse" id="solution">
-            <div class="card card-body">
-                {% for word in board.solution %}
-                {{ word }}
-                {% endfor %}
+            <div class="card card-body" id="wordsInSolution">
             </div>
         </div>
     </div>
@@ -68,6 +67,7 @@
 
 {% block javascript %}
   <script type="text/javascript" src="{{ url_for('static', filename='js/timer.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% endblock javascript %}
 
 {% endblock content %}

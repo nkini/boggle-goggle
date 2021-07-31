@@ -4,9 +4,13 @@ import time
 from util import get_words_and_prefixes
 
 
+def get_solver_input(board):
+    return [[char.lower() for char in row] for row in board]
+
+
 class Solver:
     def __init__(self, board, listname):
-        self.board = [[char.lower() for char in row] for row in board]
+        self.board = board
         self.N = len(board)
         self.MIN_WORD_LENGTH = 3
         allowed_words, valid_prefixes = get_words_and_prefixes(listname)
@@ -22,8 +26,11 @@ class Solver:
                 visited = [[False] * self.N for _ in range(self.N)]
                 self._bfs_solver(x, y, word_so_far="", visited=visited)
         end = time.time()
-        self.solving_time = end - start
-        return self.solution
+        self.stats = {
+            "total_words_checked": self.total_words_checked,
+            "total_words_found": len(self.solution),
+            "solving_time": end - start,
+        }
 
     def _bfs_solver(self, x, y, word_so_far, visited):
         visited[x][y] = True
