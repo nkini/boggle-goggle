@@ -1,7 +1,6 @@
 import sys
 
 from board import Board
-from util import get_board_input
 
 auto_or_manual = input("Autogenerate a board (a) or enter a board manually (m): ")
 if auto_or_manual.lower() == "a":
@@ -11,8 +10,7 @@ if auto_or_manual.lower() == "a":
     print(f"Creating {BOARD_SIZE} x {BOARD_SIZE} BOARD")
 elif auto_or_manual.lower() == "m":
     human_input = input("Enter the board: ")
-    board_input = get_board_input(human_input)
-    BOARD = Board(board=board_input)
+    BOARD = Board(input_string=human_input)
 else:
     sys.exit("Invalid choice")
 

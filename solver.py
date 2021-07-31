@@ -4,14 +4,28 @@ import time
 from util import get_words_and_prefixes
 
 
-def get_solver_input(board):
-    return [[char.lower() for char in row] for row in board]
+def convert_human_input_to_solver_input(human_input):
+    '''
+    :param str human_input: e.g. 'aqyw ooez vois rags'
+    :rtype: list
+    :returns: [['a','qu','y','w'],
+               ['o','o','e','z'],
+               ['v','o','i','s'],
+               ['r','a','g','s']]
+    '''
+    human_input = human_input.lower()
+    has_q = "q" in human_input
+    rows = human_input.split()
+    grid = [list(row) for row in rows]
+    if not has_q:
+        return grid
+    return [["qu" if char == "q" else char for char in row] for row in grid]
 
 
 class Solver:
-    def __init__(self, board, listname):
-        self.board = board
-        self.N = len(board)
+    def __init__(self, input_string, listname):
+        self.board = convert_human_input_to_solver_input(input_string)
+        self.N = len(self.board)
         self.MIN_WORD_LENGTH = 3
         allowed_words, valid_prefixes = get_words_and_prefixes(listname)
         self.allowed_words = [word.lower() for word in allowed_words]

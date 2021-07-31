@@ -62,13 +62,3 @@ def create_prefixes(listname):
     with open(get_prefix_filename(listname), "w") as f:
         json.dump(sorted(list(prefixes)), f, indent=2)
     return prefixes
-
-
-def get_board_input(human_input):
-    human_input = human_input.upper()
-    has_q = "Q" in human_input
-    rows = human_input.split()
-    grid = [list(row) for row in rows]
-    if not has_q:
-        return grid
-    return [["Qu" if char == "Q" else char for char in row] for row in grid]
