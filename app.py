@@ -35,7 +35,6 @@ def solve():
 
 @app.route("/solve_get_json")
 def get_solution_json():
-    # TODO: This input handling needs some cleaning up
     solver = Solver(input_string=request.args["board"], listname="twl06")
     solver.solve()
     return json.dumps(

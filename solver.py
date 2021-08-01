@@ -12,7 +12,7 @@ def convert_human_input_to_solver_input(human_input):
                ['v','o','i','s'],
                ['r','a','g','s']]
     """
-    human_input = human_input.lower()
+    human_input = human_input.strip().lower()
     has_q = "q" in human_input
     rows = human_input.split()
     grid = [list(row) for row in rows]
@@ -23,14 +23,15 @@ def convert_human_input_to_solver_input(human_input):
 
 class Solver:
     def __init__(self, input_string, listname):
+        start = time.time()
         self.board = convert_human_input_to_solver_input(input_string)
         self.N = len(self.board)
         self.MIN_WORD_LENGTH = 3
-        allowed_words, valid_prefixes = get_words_and_prefixes(listname)
-        self.allowed_words = [word.lower() for word in allowed_words]
-        self.valid_prefixes = valid_prefixes
+        self.allowed_words, self.valid_prefixes = get_words_and_prefixes(listname)
         self.solution = set()
         self.total_words_checked = 0
+        end = time.time()
+        print(f"Solver.init took {end - start} seconds")
 
     def solve(self):
         start = time.time()
@@ -39,6 +40,7 @@ class Solver:
                 visited = [[False] * self.N for _ in range(self.N)]
                 self._bfs_solver(x, y, word_so_far="", visited=visited)
         end = time.time()
+        print(f"Solver.solve took {end - start} seconds")
         self.stats = {
             "total_words_checked": self.total_words_checked,
             "total_words_found": len(self.solution),
