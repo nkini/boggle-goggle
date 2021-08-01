@@ -42,7 +42,8 @@ def get_prefixes_from_words(words):
             prefixes.add(word_so_far)
     end = time.time()
     print(
-        f"Prefix creation took {end -start} seconds.\nThere are {len(prefixes)} prefixes."
+        f"Prefix creation took {end - start} seconds.\n"
+        f"There are {len(prefixes)} prefixes."
     )
     return prefixes
 
@@ -57,7 +58,8 @@ def create_prefixes(listname):
             prefixes.add(word_so_far)
     end = time.time()
     print(
-        f"Prefix creation took {end -start} seconds.\nThere are {len(prefixes)} prefixes."
+        f"Prefix creation took {end -start} seconds.\n"
+        f"There are {len(prefixes)} prefixes."
     )
     with open(get_prefix_filename(listname), "w") as f:
         json.dump(sorted(list(prefixes)), f, indent=2)
